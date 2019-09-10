@@ -1,3 +1,5 @@
-﻿$(function(){
-    //alert("Hello World");
+﻿$(function () {
+    console.log("success");
+    console.log($('.toast'));
+    $('.toast').toast('show');
 });

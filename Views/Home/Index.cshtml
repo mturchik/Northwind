@@ -1,12 +1,86 @@
-﻿<div class="jumbotron my-2">
-    <h1 class="display-4">Northwind Traders & Co.</h1>
-    <p class="lead">We have the best prices and selection of high quality foods &amp; beverages on the planet! Check out our featured discounts below.</p>
-    <a class="btn btn-outline-secondary btn-lg" href="#" role="button"><i class="fas fa-tag"></i> Current Discounts</a>
-    <hr class="my-4">
-    <p>For exceptional international quisuine, look no further.</p>
-    <a class="btn btn-outline-secondary btn-lg" href="#" role="button"><i class="fas fa-shopping-cart"></i> Order Now</a>
+﻿<div class="container-fluid mb-5">
+    <div class="toast float-right mr-3 shadow-sm" data-autohide="false">
+        <div class="toast-header">
+            <strong class="mr-auto text-primary">Toast Header</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
+        </div>
+        <div class="toast-body">
+            Some text inside the toast body
+        </div>
+    </div>
+    <div class="jumbotron my-2 shadow-lg mb-0 ml-3 mr-3 pb-5">
+        <h1 class="display-4">Northwind Traders & Co.</h1>
+        <p class="lead">We have the best prices and selection of high quality foods &amp; beverages on the planet! Check out our featured discounts below.</p>
+
+        <hr class="my-4">
+        <p>For exceptional international quisuine, look no further.</p>
+        <a class="btn btn-outline-secondary btn-lg" href="#" role="button"><i class="fas fa-shopping-cart"></i> Order Now</a>
+        <div class="row justify-content-center">
+            <a class="btn btn-outline-secondary btn-lg" role="button"
+               data-toggle="collapse" data-target="#discountCollapse"
+               aria-expanded="false" aria-controls="discountCollapse"
+               id="collaps-btn"><i class="fas fa-tag"></i> Current Discounts</a>
+        </div>
+    </div>
+    <div class="row collapse" id="discountCollapse">
+        <div class="col-md-4 col-sm-6  shadow-sm pl-2 pr-2 text-center">
+            <h3>Fish Discount</h3>
+            <p>Save 17.82% on your next purchase of fish.</p>
+            <button class="btn-dark shadow-sm toast-btn"
+                    data-toggle="collapse" data-target="#discountCollapse"
+                    aria-expanded="false" aria-controls="discountCollapse" id="fishDiscount">
+                <i class="far fa-hand-point-right"></i> Get Code
+            </button>
+        </div>
+        <div class="col-md-4 col-sm-6 shadow-sm pl-2 pr-2 text-center">
+            <h3>Bread Discount</h3>
+            <p>100% off a loaf of bread, take it or leave it.</p>
+            <button class="btn-dark shadow-sm toast-btn"
+                    data-toggle="collapse" data-target="#discountCollapse"
+                    aria-expanded="false" aria-controls="discountCollapse" id="breadDiscount">
+                <i class="far fa-hand-point-right"></i> Get Code
+            </button>
+        </div>
+        <div class="col-md-4 shadow-sm pl-2 pr-2 text-center">
+            <h3>Wine & Dine</h3>
+            <p>Get a 50% off a bottle of wine today!</p>
+            <button class="btn-dark shadow-sm toast-btn"
+                    data-toggle="collapse" data-target="#discountCollapse"
+                    aria-expanded="false" aria-controls="discountCollapse" id="wineDiscount">
+                <i class="far fa-hand-point-right"></i> Get Code
+            </button>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
-    <script type="text/javascript" src="/js/client.js"></script>
+    <script>
+        $(function () {
+            $('#discountCollapse:nth-child(1)').data('test', 5);
+            $('.toast-btn').on('click', toggleOn);
+            $('#collaps-btn').on('click', toggleOff);
+            $(document).on('keyup',
+                function (e) {
+                    if (e.key === 'Escape')
+                        $('.toast').toast('hide');
+                });
+            $('#fishDiscount').data({'header':'Fishy Savings', 'code': 9001});
+            $('#breadDiscount').data({ 'header': 'Best Bread Ever!', 'code': 4290 });
+            $('#wineDiscount').data({ 'header': 'Can\'t Whine Discount', 'code': 2264 });
+        });
+        function toggleOn() {
+            var toastAudio = new Audio('/media/toast.wav');
+            toastAudio.play();
+
+            $('.toast-header:first:first-child').text($(this).data('header'));
+            $('.toast-body:first').text('Discount Code: ' + $(this).data('code'));
+            
+            $('.toast').toast('show');
+            $('#discountCollapse').collapse();
+        }
+        function toggleOff() {
+            $('.toast').toast('hide');
+        }
+    </script>
+    @*<script type="text/javascript" src="/js/client.js"></script>*@
 }
