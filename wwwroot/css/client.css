@@ -1,3 +1,10 @@
-﻿body {
-    font-family: 'Fjalla One', sans-serif;
+﻿* {
+    font-family: 'Titillium Web', sans-serif;
+}
+a.animated{
+     display: inline-block;
+}
+
+#hldr-balloon img {
+    visibility: hidden;
 }

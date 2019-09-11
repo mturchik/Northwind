@@ -16,10 +16,10 @@
         <p>For exceptional international quisuine, look no further.</p>
         <a class="btn btn-outline-secondary btn-lg" href="#" role="button"><i class="fas fa-shopping-cart"></i> Order Now</a>
         <div class="row justify-content-center">
-            <a class="btn btn-outline-secondary btn-lg" role="button"
+            <a class="btn btn-outline-secondary btn-lg animated heartBeat" role="button"
                data-toggle="collapse" data-target="#discountCollapse"
                aria-expanded="false" aria-controls="discountCollapse"
-               id="collaps-btn"><i class="fas fa-tag"></i> Current Discounts</a>
+               id="collapse-btn"><i class="fas fa-tag"></i> Current Discounts</a>
         </div>
     </div>
     <div class="row collapse" id="discountCollapse">
@@ -34,7 +34,7 @@
         </div>
         <div class="col-md-4 col-sm-6 shadow-sm pl-2 pr-2 text-center">
             <h3>Bread Discount</h3>
-            <p>100% off a loaf of bread, take it or leave it.</p>
+            <p>One loaf of bread, free, take it or leave it.</p>
             <button class="btn-dark shadow-sm toast-btn"
                     data-toggle="collapse" data-target="#discountCollapse"
                     aria-expanded="false" aria-controls="discountCollapse" id="breadDiscount">
@@ -51,36 +51,37 @@
             </button>
         </div>
     </div>
+    <div class="row">
+        <div class="card col-6">
+            <div class="card-body">
+                <h1>HAPPY BIRTHDAY!</h1>
+                <h5 class="card-title">Pick some balloons</h5>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="red-check"/>
+                    <label class="form-check-label" for="red-check">RED</label>
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="green-check"/>
+                    <label class="form-check-label" for="green-check">GREEN</label>
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="blue-check"/>
+                    <label class="form-check-label" for="blue-check">BLUE</label>
+                </div>
+            </div>
+            <button type="submit" class="btn-primary" id="pop-btn">Submit</button>
+        </div>
+        <div class="col-3" id="hldr-balloon">
+            <img src="media/red.png" id="red-balloon" />
+            <img src="media/green.png" id="green-balloon" />
+            <img src="media/blue.png" id="blue-balloon" />
+        </div>
+        <div class="col-3">
+
+        </div>
+    </div>
 </div>
 
 @section Scripts {
-    <script>
-        $(function () {
-            $('#discountCollapse:nth-child(1)').data('test', 5);
-            $('.toast-btn').on('click', toggleOn);
-            $('#collaps-btn').on('click', toggleOff);
-            $(document).on('keyup',
-                function (e) {
-                    if (e.key === 'Escape')
-                        $('.toast').toast('hide');
-                });
-            $('#fishDiscount').data({'header':'Fishy Savings', 'code': 9001});
-            $('#breadDiscount').data({ 'header': 'Best Bread Ever!', 'code': 4290 });
-            $('#wineDiscount').data({ 'header': 'Can\'t Whine Discount', 'code': 2264 });
-        });
-        function toggleOn() {
-            var toastAudio = new Audio('/media/toast.wav');
-            toastAudio.play();
-
-            $('.toast-header:first:first-child').text($(this).data('header'));
-            $('.toast-body:first').text('Discount Code: ' + $(this).data('code'));
-            
-            $('.toast').toast('show');
-            $('#discountCollapse').collapse();
-        }
-        function toggleOff() {
-            $('.toast').toast('hide');
-        }
-    </script>
-    @*<script type="text/javascript" src="/js/client.js"></script>*@
+    <script src="/js/client.js"></script>
 }
