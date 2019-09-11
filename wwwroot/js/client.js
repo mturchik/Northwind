@@ -1,4 +1,11 @@
 ﻿$(function() {
+    //Random Attention Getter
+    const atnGets = [
+        "bounce", "flash", "pulse", "rubberBand", "shake", "swing", "tada", "wobble", "jello", "heartBeat"
+    ];
+    const rando = Math.floor(Math.random() * atnGets.length);
+    $("#bday").addClass("animated " + atnGets[rando]);
+
     //Event Handlers
     $(".toast-btn").on("click", toggleOn);
     $("#collapse-btn").on("click", toggleOff);
@@ -7,12 +14,15 @@
             if (e.key === "Escape")
                 $(".toast").toast("hide");
         });
-    $('.form-check-input').on('change', checkBoxChange);
-    $('#pop-btn').on('click', pop);
+    $(".form-check-input").on("change", checkBoxChange);
+    $("#pop-btn").on("click", pop);
+    $(".form-check-label").on("mouseenter", mouseOver);
+    $(".form-check-label").on("mouseleave", mouseLeave);
+    $("#reset-btn").on("click", resetCheck);
 
     //uncheck all balloon checks
-    $('.form-check-input').each(function() {
-        $(this).prop('checked', false);
+    $(".form-check-input").each(function() {
+        $(this).prop("checked", false);
     });
 
     //Data
@@ -37,23 +47,42 @@ function toggleOff() {
 };
 
 function checkBoxChange() {
-    const imgId = '#' + this.id.substring(0, this.id.indexOf('-')) + "-balloon";
-    $(imgId).css('visibility', 'visible');
+    const imgId = "#" + this.id.substring(0, this.id.indexOf("-")) + "-balloon";
+    $(imgId).css("visibility", "visible");
 
-    $(this).is(':checked') ? 
-        $(imgId).removeClass().addClass('animated bounceInUp') : 
-        $(imgId).removeClass().addClass('animated fadeOut');
+    $(this).is(":checked")
+        ? $(imgId).removeClass().addClass("animated bounceInUp")
+        : $(imgId).removeClass().addClass("animated fadeOut");
 
 
-    if ($(imgId).hasClass('animated fadeOut'))
-        window.setTimeout(function () {$(imgId).css('visibility', 'hidden')}, 400);
+    if ($(imgId).hasClass("animated fadeOut"))
+        window.setTimeout(function() { $(imgId).css("visibility", "hidden") }, 800);
 };
 
 function pop() {
     var noCheck = true;
-    $('.form-check-input').each(function() {
-        if($(this).is(':checked'))
+    $(".form-check-input").each(function() {
+        if ($(this).is(":checked"))
             noCheck = false;
     });
-    noCheck ? $('.toast:last').toast('show') : $('.toast:last').toast('hide');
+    noCheck ? $(".toast:last").toast("show") : $(".toast:last").toast("hide");
+};
+
+function mouseOver() {
+    const color = this.id.substring(0, this.id.indexOf("-"));
+    $("#bday")
+        .animate({ "color": color },
+            { "easing": "easeInQuad" });
+};
+
+function mouseLeave() {
+    $('#bday')
+        .animate({ "color": "#aaaaaa" },
+            { "easing": "easeOutQuad" });
+};
+
+function resetCheck() {
+    $(".form-check-input").each(function() {
+        $(this).prop("checked", false);
+    });
 };
