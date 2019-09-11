@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Shared\" />

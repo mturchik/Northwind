@@ -8,6 +8,7 @@
                 $(".toast").toast("hide");
         });
     $('.form-check-input').on('change', checkBoxChange);
+    $('#pop-btn').on('click', pop);
 
     //uncheck all balloon checks
     $('.form-check-input').each(function() {
@@ -27,12 +28,12 @@ function toggleOn() {
     $(".toast-header:first:first-child").text($(this).data("header"));
     $(".toast-body:first").text("Discount Code: " + $(this).data("code"));
 
-    $(".toast").toast("show");
+    $(".toast:first").toast("show");
     $("#discountCollapse").collapse();
 };
 
 function toggleOff() {
-    $(".toast").toast("hide");
+    $(".toast:first").toast("hide");
 };
 
 function checkBoxChange() {
@@ -46,4 +47,13 @@ function checkBoxChange() {
 
     if ($(imgId).hasClass('animated fadeOut'))
         window.setTimeout(function () {$(imgId).css('visibility', 'hidden')}, 400);
+};
+
+function pop() {
+    var noCheck = true;
+    $('.form-check-input').each(function() {
+        if($(this).is(':checked'))
+            noCheck = false;
+    });
+    noCheck ? $('.toast:last').toast('show') : $('.toast:last').toast('hide');
 };
