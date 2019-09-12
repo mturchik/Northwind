@@ -51,8 +51,8 @@ function checkBoxChange() {
     $(imgId).css("visibility", "visible");
 
     $(this).is(":checked")
-        ? $(imgId).removeClass().addClass("animated bounceInUp")
-        : $(imgId).removeClass().addClass("animated fadeOut");
+        ? $(imgId).removeClass().addClass("animated bounceInUp")//is checked
+        : $(imgId).removeClass().addClass("animated fadeOut");//not checked
 
 
     if ($(imgId).hasClass("animated fadeOut"))
@@ -85,4 +85,5 @@ function resetCheck() {
     $(".form-check-input").each(function() {
         $(this).prop("checked", false);
     });
+    $(".form-check-input").each(checkBoxChange);
 };
