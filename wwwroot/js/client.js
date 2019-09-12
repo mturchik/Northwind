@@ -21,9 +21,7 @@
     $("#reset-btn").on("click", resetCheck);
 
     //uncheck all balloon checks
-    $(".form-check-input").each(function() {
-        $(this).prop("checked", false);
-    });
+    $(".form-check-input").each(checkBoxChange);
 
     //Data
     $("#fishDiscount").data({ 'header': "Fishy Savings", 'code': 9001 });
@@ -48,10 +46,9 @@ function toggleOff() {
 
 function checkBoxChange() {
     const imgId = "#" + this.id.substring(0, this.id.indexOf("-")) + "-balloon";
-    $(imgId).css("visibility", "visible");
 
     $(this).is(":checked")
-        ? $(imgId).removeClass().addClass("animated bounceInUp")//is checked
+        ? $(imgId).css("visibility", "visible").removeClass().addClass("animated bounceInUp")//is checked
         : $(imgId).removeClass().addClass("animated fadeOut");//not checked
 
 
