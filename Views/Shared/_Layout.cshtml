@@ -31,7 +31,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-database"></i> Products
+                        <i class="fas fa-database mr-1"></i> Products
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" asp-action="Index" asp-controller="Category"><i class="fas fa-list-ul"></i> Browse Categories</a>
@@ -42,7 +42,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-users"></i> Customers
+                        <i class="fas fa-users mr-1"></i> Customers
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt"></i> Sign In</a>
@@ -50,6 +50,9 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"><i class="fas fa-info-circle"></i> Account</a>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Birthday"><i class="fas fa-birthday-cake mr-1"></i>Birthday Special</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
