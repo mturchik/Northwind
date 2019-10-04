@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Northwind Category Products";
+}
+
+@using Northwind.Models
+@model IEnumerable<Product>
+
+
+<div class="container-fluid mb-5">
+    <div class="jumbotron my-2 shadow-lg mb-0 ml-3 mr-3 pb-5">
+        <h1 class="display-4">Northwind Traders & Co.</h1>
+        <p class="lead">Check out our featured products below!</p>
+
+        <hr class="my-4">
+        <p>Tasteful, wonderful, exquisite. All the @Model.First().Category.CategoryName you will ever need.</p>
+        <div class="list-group list-group-flush mb-5">
+            @foreach (var p in Model)
+            {
+                <a class="list-group-item d-flex justify-content-between align-items-center" asp-controller="Product" asp-action="Index" asp-route-id="@p.ProductId">
+                    <div>
+                        @p.ProductName
+                    </div>
+                </a>
+            }
+        </div>
+
+        <div class="row">
+            <a class="font-weight-light" asp-controller="Category" asp-action="Index">Return to Categories</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/js/client.js"></script>
+}

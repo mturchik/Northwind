@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Northwind.Models;
 
 namespace Northwind.Controllers
@@ -7,12 +9,12 @@ namespace Northwind.Controllers
     {
         private readonly INorthwindRepository _db;
 
-        public ProductController(INorthwindRepository repo)
+        public ProductController(INorthwindRepository db)
         {
-            _db = repo;
+            _db = db;
         }
 
-        public IActionResult Category() => View(_db.Categories);
-        
+        public IActionResult Index(int id) => View(_db.Products.Include(p => p.Category)
+            .Where(p => p.Discontinued == false).First(p => p.ProductId == id));
     }
 }
