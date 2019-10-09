@@ -2,6 +2,9 @@
     ViewData["Title"] = "Northwind Home";
 }
 
+@using Models
+@model IEnumerable<Discount>
+
 <div class="container-fluid mb-5">
     <div class="toast float-right mr-3 shadow-sm" data-autohide="false">
         <div class="toast-header">
@@ -20,7 +23,7 @@
         <p>
             For exceptional international quisuine, look no further.
             <span>
-                <b>Now with working categories!</b>
+                <b>Now with working categories!</b><small class="ml-2">(And some discounts too)</small>
             </span>
         </p>
         <a class="btn btn-outline-secondary btn-lg" href="#" role="button"><i class="fas fa-shopping-cart"></i> Order Now</a>
@@ -34,33 +37,20 @@
         </div>
     </div>
     <div class="row collapse" id="discountCollapse">
-        <div class="col-md-4 col-sm-6 shadow-sm pl-2 pr-2 pb-2 text-center">
-            <h3>Fish Discount</h3>
-            <p>Save 17.82% on your next purchase of fish.</p>
-            <button class="btn-dark shadow-sm toast-btn"
-                    data-toggle="collapse" data-target="#discountCollapse"
-                    aria-expanded="false" aria-controls="discountCollapse" id="fishDiscount">
-                <i class="far fa-hand-point-right"></i> Get Code
-            </button>
-        </div>
-        <div class="col-md-4 col-sm-6 shadow-sm pl-2 pr-2 pb-2 text-center">
-            <h3>Bread Discount</h3>
-            <p>One loaf of bread, free, take it or leave it.</p>
-            <button class="btn-dark shadow-sm toast-btn"
-                    data-toggle="collapse" data-target="#discountCollapse"
-                    aria-expanded="false" aria-controls="discountCollapse" id="breadDiscount">
-                <i class="far fa-hand-point-right"></i> Get Code
-            </button>
-        </div>
-        <div class="col-md-4 shadow-sm pl-2 pr-2 pb-2 text-center">
-            <h3>Wine & Dine</h3>
-            <p>Get a 50% off a bottle of wine today!</p>
-            <button class="btn-dark shadow-sm toast-btn"
-                    data-toggle="collapse" data-target="#discountCollapse"
-                    aria-expanded="false" aria-controls="discountCollapse" id="wineDiscount">
-                <i class="far fa-hand-point-right"></i> Get Code
-            </button>
-        </div>
+        @foreach (var discount in Model)
+        {
+            <div class="col-md-4 col-sm-6 shadow-sm pl-2 pr-2 pb-2 text-center">
+                <h3>@discount.Title</h3>
+                <p>@discount.Description</p>
+                <p class="text-light">Expires on: @discount.EndTime.ToShortDateString()</p>
+                <button class="btn-dark shadow-sm toast-btn"
+                        data-toggle="collapse" data-target="#discountCollapse"
+                        aria-expanded="false" aria-controls="discountCollapse"
+                        data-header="@discount.Title" data-code="@discount.Code">
+                    <i class="far fa-hand-point-right"></i> Get Code
+                </button>
+            </div>
+        }
     </div>
 </div>
 

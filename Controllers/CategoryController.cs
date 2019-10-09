@@ -14,9 +14,9 @@ namespace Northwind.Controllers
             _db = db;
         }
 
-        public IActionResult Index() => View(_db.Categories.Include(c => c.Products).OrderBy(c => c.CategoryName));
+        public IActionResult Categories() => View(_db.Categories.Include(c => c.Products).OrderBy(c => c.CategoryName));
 
-        public IActionResult Product(int id) => View(_db.Products.Include(p => p.Category)
+        public IActionResult Products(int id) => View(_db.Products.Include(p => p.Category)
             .Where(p => p.CategoryId == id && p.Discontinued == false).OrderBy(p => p.ProductName));
     }
 }

@@ -13,5 +13,6 @@ namespace Northwind.Models
 
         public IQueryable<Product> Products => _db.Products;
         public IQueryable<Category> Categories => _db.Categories;
+        public IQueryable<Discount> Discounts => _db.Discounts;
     }
 }

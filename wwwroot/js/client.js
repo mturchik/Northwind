@@ -22,11 +22,6 @@
 
     //uncheck all balloon checks
     $(".form-check-input").each(checkBoxChange);
-
-    //Data
-    $("#fishDiscount").data({ 'header': "Fishy Savings", 'code': 9001 });
-    $("#breadDiscount").data({ 'header': "Best Bread Ever!", 'code': 4290 });
-    $("#wineDiscount").data({ 'header': "Can't Whine Discount", 'code': 2264 });
 });
 
 function toggleOn() {
