@@ -7,5 +7,6 @@ namespace Northwind.Models
         IQueryable<Product> Products { get; }
         IQueryable<Category> Categories { get; }
         IQueryable<Discount> Discounts { get; }
+        IQueryable<Customer> Customers { get; }
     }
 }
