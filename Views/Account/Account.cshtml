@@ -1,0 +1,34 @@
+﻿@using Northwind.Models
+@model AppUser
+
+@{
+    ViewData["Title"] = "Northwind - Account";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid mb-5">
+    <div class="jumbotron my-2 shadow-lg mb-0 ml-3 mr-3 pb-5">
+        <h1 class="display-4">Northwind Traders & Co.</h1>
+        <p class="lead">Welcome to your personalized and special account page, valued consumer.</p>
+
+        <hr class="my-4">
+        <div class="row">
+            <div class="col">
+                <h3>Username: @Model.UserName</h3>
+                <h3>Email: @Model.Email</h3>
+                <a asp-action="Logout" asp-controller="Account">
+                    <button class="btn btn-danger">Log Out</button>
+                </a>
+                <h6>
+                    <small>
+                        <a asp-action="Index" asp-controller="Home">Go Home</a>
+                    </small>
+                </h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/js/client.js"></script>
+}

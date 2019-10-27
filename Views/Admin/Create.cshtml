@@ -1,0 +1,38 @@
+﻿@using Northwind.Models
+@model CreateUser
+
+@{
+    ViewData["Title"] = "Northwind - Create User";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid mb-5">
+    <div class="jumbotron my-2 shadow-lg mb-0 ml-3 mr-3 pb-5">
+        <h1 class="display-4">Northwind Traders & Co.</h1>
+        <p class="lead">Buy a new slave? Your glory allows you to buy for free.</p>
+
+        <hr class="my-4">
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <form asp-action="Create" method="post">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a asp-action="Index" class="btn btn-primary">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/js/client.js"></script>
+}

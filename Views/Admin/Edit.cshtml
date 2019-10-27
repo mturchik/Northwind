@@ -1,0 +1,42 @@
+﻿@using Northwind.Models
+@model EditUser
+
+@{
+    ViewData["Title"] = "Northwind - Edit User";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid mb-5">
+    <div class="jumbotron my-2 shadow-lg mb-0 ml-3 mr-3 pb-5">
+        <h1 class="display-4">Northwind Traders & Co.</h1>
+        <p class="lead">Does your slave need a change? Tell them to do it themselves, you nancy.</p>
+
+        <hr class="my-4">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="CurrentPassword"></label>
+                <input asp-for="CurrentPassword" class="form-control" required="required" />
+            </div>
+            <div class="form-group">
+                <label asp-for="NewPassword"></label>
+                <input asp-for="NewPassword" class="form-control"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Edit</button>
+            <a asp-action="Index" class="btn btn-primary">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/js/client.js"></script>
+}
