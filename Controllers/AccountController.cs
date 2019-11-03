@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite.Internal.UrlActions;
 using Northwind.Models;
 
 namespace Northwind.Controllers
@@ -17,7 +18,7 @@ namespace Northwind.Controllers
             _signInManager = signInManager;
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Account(string returnUrl)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -42,6 +43,7 @@ namespace Northwind.Controllers
             var result = await _signInManager.PasswordSignInAsync(user, login.Password, false, false);
             if (result.Succeeded)
                 return Redirect(returnUrl ?? "/Account/Account");
+            
             ModelState.AddModelError("", "Invalid user or password.");
             return View();
         }

@@ -2,48 +2,43 @@
     ViewData["Title"] = "Northwind Happy Birthday!";
 }
 
-<div class="container-fluid mb-5">
-    <div class="jumbotron my-2 shadow-lg mb-0 ml-3 mr-3 pb-5">
-        <h1 class="display-4">Northwind Traders & Co.</h1>
-        <p class="lead">We wish you a happy birthday on this joyous occasion.</p>
+<p class="lead">We wish you a happy birthday on this joyous occasion.</p>
 
-        <hr class="my-4">
-        <div class="row ml-3 mt-3">
-            <div class="card col-6 pb-3">
-                <div class="card-body">
-                    <h1 id="bday">HAPPY BIRTHDAY!</h1>
-                    <h5 class="card-title">Pick some balloons</h5>
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="red-check"/>
-                        <label class="form-check-label" for="red-check" id="red-label">RED</label>
-                    </div>
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="green-check"/>
-                        <label class="form-check-label" for="green-check" id="green-label">GREEN</label>
-                    </div>
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="blue-check"/>
-                        <label class="form-check-label" for="blue-check" id="blue-label">BLUE</label>
-                    </div>
-                    <button id="reset-btn" class="btn btn-danger" type="button">Reset Color Choice</button>
-                </div>
-                <button type="submit" class="btn btn-success" id="pop-btn">Submit</button>
+<hr class="my-4">
+<div class="row ml-3 mt-3">
+    <div class="card col-6 pb-3">
+        <div class="card-body">
+            <h1 id="bday">HAPPY BIRTHDAY!</h1>
+            <h5 class="card-title">Pick some balloons</h5>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="red-check"/>
+                <label class="form-check-label" for="red-check" id="red-label">RED</label>
             </div>
-            <div class="col-3" id="hldr-balloon">
-                <img src="../media/red.png" id="red-balloon"/>
-                <img src="../media/green.png" id="green-balloon"/>
-                <img src="../media/blue.png" id="blue-balloon"/>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="green-check"/>
+                <label class="form-check-label" for="green-check" id="green-label">GREEN</label>
             </div>
-            <div class="col-3">
-                <div class="toast mr-3 shadow-sm" data-autohide="false">
-                    <div class="toast-header">
-                        <strong class="mr-auto text-primary">MISSING BALLOONS!!</strong>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
-                    </div>
-                    <div class="toast-body">
-                        YOU NEED TO PICK SOME BALLOONS FOR YOUR PARTY, DUMMY!
-                    </div>
-                </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="blue-check"/>
+                <label class="form-check-label" for="blue-check" id="blue-label">BLUE</label>
+            </div>
+            <button id="reset-btn" class="btn btn-danger" type="button">Reset Color Choice</button>
+        </div>
+        <button type="submit" class="btn btn-success" id="pop-btn">Submit</button>
+    </div>
+    <div class="col-3" id="hldr-balloon">
+        <img src="../media/red.png" id="red-balloon"/>
+        <img src="../media/green.png" id="green-balloon"/>
+        <img src="../media/blue.png" id="blue-balloon"/>
+    </div>
+    <div class="col-3">
+        <div class="toast mr-3 shadow-sm" data-autohide="false">
+            <div class="toast-header">
+                <strong class="mr-auto text-primary">MISSING BALLOONS!!</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
+            </div>
+            <div class="toast-body">
+                YOU NEED TO PICK SOME BALLOONS FOR YOUR PARTY, DUMMY!
             </div>
         </div>
     </div>

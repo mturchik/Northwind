@@ -34,7 +34,7 @@ namespace Northwind.Controllers
 
             if (await _userManager.FindByEmailAsync(model.Email) != null)
             {
-                ModelState.AddModelError("", "An account with that email already exists.");
+                ModelState.AddModelError("Email", "An account with that email already exists.");
                 return View(model);
             }
 
@@ -50,7 +50,7 @@ namespace Northwind.Controllers
             //Return to Create page if create failed
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error.Description);
+                ModelState.AddModelError(error.Code, error.Description);
             }
 
             return View(model);
@@ -72,14 +72,14 @@ namespace Northwind.Controllers
         public async Task<IActionResult> Edit(EditUser model)
         {
             if (!ModelState.IsValid)
-                return RedirectToAction("Edit", routeValues: model.Id);
+                return View(model);
 
             var user = await _userManager.FindByIdAsync(model.Id);
             var passwordStatus = await _userManager.CheckPasswordAsync(user, model.CurrentPassword);
             if (!passwordStatus)
             {
-                ModelState.AddModelError("", "Incorrect password entered.");
-                return RedirectToAction("Edit", routeValues: model.Id);
+                ModelState.AddModelError("Password", "The current password must be supplied correctly.");
+                return View(model);
             }
             if (user.Email != model.Email)
             {

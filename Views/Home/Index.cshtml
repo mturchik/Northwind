@@ -5,53 +5,50 @@
 @using Models
 @model IEnumerable<Discount>
 
-<div class="container-fluid mb-5">
-    <div class="toast float-right mr-3 shadow-sm" data-autohide="false">
-        <div class="toast-header">
-            <strong class="mr-auto text-primary">Toast Header</strong>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
-        </div>
-        <div class="toast-body">
-            Some text inside the toast body
-        </div>
-    </div>
-    <div class="jumbotron my-2 shadow-lg mb-0 ml-3 mr-3 pb-5">
-        <h1 class="display-4">Northwind Traders & Co.</h1>
-        <p class="lead">We have the best prices and selection of high quality foods &amp; beverages on the planet! Check out our featured discounts below.</p>
 
-        <hr class="my-4">
-        <p>
-            For exceptional international quisuine, look no further.
-            <span>
-                <b>Now with working categories!</b><small class="ml-2">(And some discounts too)</small>
-            </span>
-        </p>
-        <a class="btn btn-outline-secondary btn-lg" href="#" role="button"><i class="fas fa-shopping-cart"></i> Order Now</a>
-        <div class="row justify-content-center">
-            <a class="btn btn-outline-secondary btn-lg animated heartBeat" role="button"
-               data-toggle="collapse" data-target="#discountCollapse"
-               aria-expanded="false" aria-controls="discountCollapse"
-               id="collapse-btn">
-                <i class="fas fa-tag"></i> Current Discounts
-            </a>
+<p class="lead">We have the best prices and selection of high quality foods &amp; beverages on the planet! Check out our featured discounts below.</p>
+
+<hr class="my-4">
+<p>
+    For exceptional international quisuine, look no further.
+    <span>
+        <b>Now with working categories!</b><small class="ml-2">(And some discounts too)</small>
+    </span>
+</p>
+<a class="btn btn-outline-secondary btn-lg" href="#" role="button"><i class="fas fa-shopping-cart"></i> Order Now</a>
+<div class="row justify-content-center">
+    <a class="btn btn-outline-secondary btn-lg animated heartBeat" role="button"
+       data-toggle="collapse" data-target="#discountCollapse"
+       aria-expanded="false" aria-controls="discountCollapse"
+       id="collapse-btn">
+        <i class="fas fa-tag"></i> Current Discounts
+    </a>
+</div>
+<div class="toast float-right mr-3 shadow-sm" data-autohide="false">
+    <div class="toast-header">
+        <strong class="mr-auto text-primary">Toast Header</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
+    </div>
+    <div class="toast-body">
+        Some text inside the toast body
+    </div>
+</div>
+<hr class="my-4">
+<div class="row collapse" id="discountCollapse">
+    @foreach (var discount in Model)
+    {
+        <div class="col-md-4 col-sm-6 shadow-sm pl-2 pr-2 pb-2 text-center">
+            <h3>@discount.Title</h3>
+            <p>@discount.Description</p>
+            <p class="text-light">Expires on: @discount.EndTime.ToShortDateString()</p>
+            <button class="btn-dark shadow-sm toast-btn"
+                    data-toggle="collapse" data-target="#discountCollapse"
+                    aria-expanded="false" aria-controls="discountCollapse"
+                    data-header="@discount.Title" data-code="@discount.Code">
+                <i class="far fa-hand-point-right"></i> Get Code
+            </button>
         </div>
-    </div>
-    <div class="row collapse" id="discountCollapse">
-        @foreach (var discount in Model)
-        {
-            <div class="col-md-4 col-sm-6 shadow-sm pl-2 pr-2 pb-2 text-center">
-                <h3>@discount.Title</h3>
-                <p>@discount.Description</p>
-                <p class="text-light">Expires on: @discount.EndTime.ToShortDateString()</p>
-                <button class="btn-dark shadow-sm toast-btn"
-                        data-toggle="collapse" data-target="#discountCollapse"
-                        aria-expanded="false" aria-controls="discountCollapse"
-                        data-header="@discount.Title" data-code="@discount.Code">
-                    <i class="far fa-hand-point-right"></i> Get Code
-                </button>
-            </div>
-        }
-    </div>
+    }
 </div>
 
 @section Scripts {

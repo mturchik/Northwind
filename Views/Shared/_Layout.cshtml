@@ -49,7 +49,9 @@
                     <a class="dropdown-item" asp-action="Register" asp-controller="Customer"><i class="fas fa-user-plus"></i> Register</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" asp-action="Account" asp-route-returnUrl="/Account/Account" asp-controller="Account"><i class="fas fa-info-circle"></i> Account</a>
-                    <a class="dropdown-item" asp-action="Index" asp-controller="Admin"><i class="fas fa-info-circle"></i> Admin</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" asp-action="Index" asp-controller="Admin"><i class="fas fa-info-circle"></i> Admin - Accounts</a>
+                    <a class="dropdown-item" asp-action="Index" asp-controller="RoleAdmin"><i class="fas fa-info-circle"></i> Admin - Roles</a>
                 </div>
             </li>
             <li class="nav-item">
@@ -64,7 +66,13 @@
         </form>
     </div>
 </nav>
-@RenderBody()
+
+<div class="container-fluid mb-5">
+    <div class="jumbotron my-2 shadow-lg mb-0 ml-3 mr-3 pb-5">
+        <h1 class="display-4">Northwind Traders & Co.</h1>
+        @RenderBody()
+    </div>
+</div>
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- popper -->

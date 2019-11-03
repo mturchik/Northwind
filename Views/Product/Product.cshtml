@@ -4,34 +4,28 @@
     ViewData["Title"] = "Northwind Product";
 }
 
-<div class="container-fluid mb-5">
-    <div class="jumbotron my-2 shadow-lg mb-0 ml-3 mr-3 pb-5">
-        <h1 class="display-4">Northwind Traders & Co.</h1>
-        <p class="lead">Great choice! Buy today!</p>
+<p class="lead">Great choice! Buy today!</p>
 
-        <hr class="my-4">
-        <div class="row">
-            <div class="col-6">
-                <h1>@Model.ProductName</h1>
-                <hr/>
-                <h3>Price: $@Model.UnitPrice</h3>
-                <hr/>
-            </div>
-            <div class="col-6">
-                <h4>Category: @Model.Category.CategoryName</h4>
-                <hr/>
-                <h4>Quantity Per Unit: @Model.QuantityPerUnit</h4>
-                <hr/>
-            </div>
-        </div>
-        <div class="row mb-5">
-            <button class="btn btn-success">Add to cart</button>
-        </div>
-        <div class="row">
-            <a class="font-weight-light" asp-controller="Category" asp-action="Products" asp-route-id="@Model.CategoryId">Return to category page</a>
-        </div>
-
+<hr class="my-4">
+<div class="row">
+    <div class="col-6">
+        <h1>@Model.ProductName</h1>
+        <hr/>
+        <h3>Price: $@Model.UnitPrice</h3>
+        <hr/>
     </div>
+    <div class="col-6">
+        <h4>Category: @Model.Category.CategoryName</h4>
+        <hr/>
+        <h4>Quantity Per Unit: @Model.QuantityPerUnit</h4>
+        <hr/>
+    </div>
+</div>
+<div class="row mb-5">
+    <button class="btn btn-success">Add to cart</button>
+</div>
+<div class="row">
+    <a class="font-weight-light" asp-controller="Category" asp-action="Products" asp-route-id="@Model.CategoryId">Return to category page</a>
 </div>
 
 @section Scripts {
