@@ -20,13 +20,15 @@ namespace Northwind.Controllers
         {
             return View(_userManager.Users);
         }
-
+        
+        [Authorize(Roles = "User")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Create(CreateUser model)
         {
             if (!ModelState.IsValid)
@@ -81,11 +83,13 @@ namespace Northwind.Controllers
                 ModelState.AddModelError("Password", "The current password must be supplied correctly.");
                 return View(model);
             }
+
             if (user.Email != model.Email)
             {
                 var emailToken = await _userManager.GenerateChangeEmailTokenAsync(user, model.Email);
                 await _userManager.ChangeEmailAsync(user, model.Email, emailToken);
             }
+
             if (user.UserName != model.Name)
                 await _userManager.SetUserNameAsync(user, model.Name);
             if (!string.IsNullOrWhiteSpace(model.NewPassword))
@@ -95,6 +99,7 @@ namespace Northwind.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Moderator")]
         public async Task<IActionResult> Delete(string id)
         {
             var user = await _userManager.FindByIdAsync(id);

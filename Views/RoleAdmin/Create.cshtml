@@ -1,24 +1,18 @@
-﻿@model string
-
-@{
-    ViewData["Title"] = "Northwind - Create Role User";
+﻿@{
+    ViewData["Title"] = "Northwind - Create User Role";
     Layout = "_Layout";
 }
 
-<p class="lead">Buy a new slave? Your glory allows you to buy for free.</p>
+<p class="lead">Add a new role for a user below.</p>
 
 <hr class="my-4">
 
 <div asp-validation-summary="All" class="text-danger"></div>
 <form asp-action="Create" method="post">
     <div class="form-group">
-        <label for="name"></label>
-        <input id="name" name="name" class="form-control"/>
+        <label for="name">New Role</label>
+        <input id="name" name="name" class="form-control" placeholder="Name"/>
     </div>
     <button type="submit" class="btn btn-primary">Create</button>
     <a asp-action="Index" class="btn btn-primary">Cancel</a>
 </form>
-
-@section Scripts {
-    <script src="/js/client.js"></script>
-}

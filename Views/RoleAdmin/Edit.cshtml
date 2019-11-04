@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IdentityRole
+
+@{
+    ViewBag.Title = "Northwind - Edit User Role";
+    Layout = "_Layout";
+}
+
+<p class="lead">Edit the user role's name?</p>
+
+<hr class="my-4">
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <input name="id" type="hidden" value="@Model.Id"/>
+        <label for="name"></label>
+        <input id="name" name="name" class="form-control" placeholder="@Model.Name"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Edit</button>
+    <a asp-action="Index" class="btn btn-primary">Cancel</a>
+</form>
