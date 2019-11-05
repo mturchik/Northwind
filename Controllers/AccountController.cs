@@ -18,7 +18,7 @@ namespace Northwind.Controllers
             _signInManager = signInManager;
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize]
         public async Task<IActionResult> Account(string returnUrl)
         {
             var user = await _userManager.GetUserAsync(User);
