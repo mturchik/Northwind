@@ -1,22 +1,56 @@
-﻿@using Microsoft.AspNetCore.Identity
-@model IdentityRole
+﻿@using Northwind.Models
+@model EditRole
 
 @{
-    ViewBag.Title = "Northwind - Edit User Role";
+    ViewBag.Title = "Northwind - Edit User Roles";
     Layout = "_Layout";
 }
 
-<p class="lead">Edit the user role's name?</p>
+<p class="lead">Select users to toggle to be In the role or NOT In the role.</p>
 
 <hr class="my-4">
 
 <div asp-validation-summary="All" class="text-danger"></div>
 <form asp-action="Edit" method="post">
-    <div class="form-group">
-        <input name="id" type="hidden" value="@Model.Id"/>
-        <label for="name"></label>
-        <input id="name" name="name" class="form-control" placeholder="@Model.Name"/>
-    </div>
-    <button type="submit" class="btn btn-primary">Edit</button>
+    <input type="hidden" name="RoleName" value="@Model.Role.Name" />
+    <input type="hidden" name="RoleId" value="@Model.Role.Id" />
+    <h3 class="ml-4">Role Name: @Model.Role.NormalizedName</h3>
+    <table class="ml-4 table table-bordered">
+        <tbody>
+            <tr>
+                <th>-Users In Role-</th>
+            </tr>
+            @foreach (var user in Model.UsersInRole)
+            {
+                <tr>
+                    <td>
+                        <div class="ml-4">
+                            <input type="checkbox" class="form-check-input mr-1" name="IdsToRemove" id="@user.Id" value="@user.Id" />
+                            <label for="@user.Id">@user.NormalizedUserName</label>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <table class="ml-4 table table-bordered">
+        <tbody>
+            <tr>
+                <th>-Users Not In Role-</th>
+            </tr>
+            @foreach (var user in Model.UsersNotInRole)
+            {
+                <tr>
+                    <td>
+                        <div class="ml-4">
+                            <input type="checkbox" class="form-check-input mr-1" name="IdsToAdd" id="@user.Id" value="@user.Id"/>
+                            <label for="@user.Id">@user.NormalizedUserName</label>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Assign</button>
     <a asp-action="Index" class="btn btn-primary">Cancel</a>
 </form>

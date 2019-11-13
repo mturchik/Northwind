@@ -16,16 +16,10 @@ namespace Northwind.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
-        {
-            return View(_userManager.Users);
-        }
-        
+        public IActionResult Index() => View(_userManager.Users);
+
         [Authorize(Roles = "User")]
-        public IActionResult Create()
-        {
-            return View();
-        }
+        public IActionResult Create() => View();
 
         [HttpPost]
         [Authorize(Roles = "User")]

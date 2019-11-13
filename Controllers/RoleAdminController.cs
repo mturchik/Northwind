@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -20,15 +21,9 @@ namespace Northwind.Controllers
             _roleManager = roleManager;
         }
 
-        public IActionResult Index()
-        {
-            return View(_roleManager.Roles);
-        }
+        public IActionResult Index() => View(_roleManager.Roles);
 
-        public IActionResult Create()
-        {
-            return View();
-        }
+        public IActionResult Create() => View();
 
         [HttpPost]
         public async Task<IActionResult> Create([Required] string name)
@@ -53,30 +48,54 @@ namespace Northwind.Controllers
         public async Task<IActionResult> Edit(string id)
         {
             var role = await _roleManager.FindByIdAsync(id);
-            return View(role);
+            var model = new EditRole
+            {
+                Role = role
+            };
+            foreach (var user in _userManager.Users)
+            {
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                    model.UsersInRole.Add(user);
+                else
+                    model.UsersNotInRole.Add(user);
+            }
+
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, string name)
+        public async Task<IActionResult> Edit(ModifyUserRoles model)
         {
-            var roleById = await _roleManager.FindByIdAsync(id);
-            if (!ModelState.IsValid)
-                return View(roleById);
-
-            var roleByName = await _roleManager.FindByNameAsync(name);
-            if (roleByName != null)
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("Name", "There is already a role by that name.");
-                return View(roleById);
+                IdentityResult result;
+                foreach (var id in model.IdsToAdd)
+                {
+                    var user = await _userManager.FindByIdAsync(id);
+                    if (user == null) break;
+                    if (await _userManager.IsInRoleAsync(user, model.RoleName)) break;
+
+                    result = await _userManager.AddToRoleAsync(user, model.RoleName);
+                    if (!result.Succeeded)
+                        AddErrorsFromResult(result);
+                }
+
+                foreach (var id in model.IdsToRemove)
+                {
+                    var user = await _userManager.FindByIdAsync(id);
+                    if (user == null) break;
+                    if (!await _userManager.IsInRoleAsync(user, model.RoleName)) break;
+
+                    result = await _userManager.RemoveFromRoleAsync(user, model.RoleName);
+                    if (!result.Succeeded)
+                        AddErrorsFromResult(result);
+                }
             }
 
-            roleById.Name = name;
-            var result = await _roleManager.UpdateAsync(roleById);
-            if (result.Succeeded)
+            if (ModelState.IsValid)
                 return RedirectToAction("Index");
 
-            AddErrorsFromResult(result);
-            return View(roleById);
+            return await Edit(model.RoleId);
         }
 
         [Authorize(Roles = "Moderator")]
@@ -91,34 +110,6 @@ namespace Northwind.Controllers
             }
 
             await _roleManager.DeleteAsync(role);
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult AddToRole()
-        {
-            var model = new UsersRoles
-            {
-                Roles = _roleManager.Roles.ToList(),
-                Users = _userManager.Users.ToList()
-            };
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddToRole(string userId, string roleName)
-        {
-            if (!ModelState.IsValid)
-            {
-                var model = new UsersRoles
-                {
-                    Roles = _roleManager.Roles.ToList(),
-                    Users = _userManager.Users.ToList()
-                };
-                return View(model);
-            }
-
-            var user = await _userManager.FindByIdAsync(userId);
-            await _userManager.AddToRoleAsync(user, roleName);
             return RedirectToAction("Index");
         }
 
