@@ -1,0 +1,69 @@
+﻿@using Models
+@model Employee
+
+<p class="lead">Register as our newest and bestest customer! Do it right now!</p>
+
+<hr class="my-4">
+<form method="post" asp-action="AddCustomer" asp-controller="Customer">
+    <div asp-validation-summary="All"></div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label asp-for="@Model.Name">Employee Name: </label>
+            <input asp-for="@Model.Name" class="form-control" placeholder="Employee Name" required="required">
+        </div>
+        <div class="form-group col">
+            <label asp-for="@Model.Address">Street Address: </label>
+            <input asp-for="@Model.Address" class="form-control" placeholder="Street Address">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <div class="form-row">
+                <div class="form-group col">
+                    <label asp-for="@Model.Phone">Phone Number: </label>
+                    <input asp-for="@Model.Phone" class="form-control" placeholder="Phone Number">
+                </div>
+                <div class="form-group col">
+                    <label asp-for="@Model.Fax">Fax Number: </label>
+                    <input asp-for="@Model.Fax" class="form-control" placeholder="Fax Number">
+                </div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <div class="form-row">
+                <div class="form-group col">
+                    <label asp-for="@Model.City">City: </label>
+                    <input asp-for="@Model.City" class="form-control" placeholder="City">
+                </div>
+                <div class="form-group col">
+                    <label asp-for="@Model.Region">Region: </label>
+                    <input asp-for="@Model.Region" class="form-control" placeholder="Region">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+        </div>
+        <div class="form-group col">
+            <div class="form-row">
+                <div class="form-group col">
+                    <label asp-for="@Model.PostalCode">Postal Code: </label>
+                    <input asp-for="@Model.PostalCode" class="form-control" placeholder="Postal Code">
+                </div>
+                <div class="form-group col">
+                    <label asp-for="@Model.Country">Country: </label>
+                    <input asp-for="@Model.Country" class="form-control" placeholder="Country">
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="my-4">
+    <div class="form-group row">
+        <button type="submit" class="btn btn-primary mx-auto w-25">Register Employee</button>
+    </div>
+</form>
+
+@section Scripts {
+    <script src="/js/client.js"></script>
+}
