@@ -41,8 +41,47 @@ namespace Northwind.Controllers
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
+            {
+                var newUser = await _userManager.FindByEmailAsync(model.Email);
+                await _userManager.AddToRoleAsync(newUser, "User");
                 return RedirectToAction("Index");
+            }
+            //Return to Create page if create failed
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(error.Code, error.Description);
+            }
 
+            return View(model);
+        }
+        //Employee 
+
+        [HttpPost]
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> CreateEmployee(CreateUser model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if (await _userManager.FindByEmailAsync(model.Email) != null)
+            {
+                ModelState.AddModelError("Email", "An account with that email already exists.");
+                return View(model);
+            }
+
+            var user = new AppUser
+            {
+                UserName = model.Name,
+                Email = model.Email
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                var newUser = await _userManager.FindByEmailAsync(model.Email);
+                await _userManager.AddToRoleAsync(newUser, "User");
+                await _userManager.AddToRoleAsync(newUser, "Employee");
+                return RedirectToAction("Index");
+                }
             //Return to Create page if create failed
             foreach (var error in result.Errors)
             {
