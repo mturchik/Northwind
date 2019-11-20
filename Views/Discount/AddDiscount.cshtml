@@ -1,0 +1,49 @@
+﻿@using Northwind.Models
+@model Discount
+@{
+    ViewData["Title"] = "AddDiscount";
+}
+
+<h1>AddDiscount</h1>
+
+<form method="post">
+    <div asp-validation-summary="All" style="color:red;"></div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.Title">Title</label>
+            <input asp-for="@Model.Title" type="text" class="form-control" placeholder="Discount Name" required />
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.Description">Company Name</label>
+            <input asp-for="@Model.Description" class="form-control" placeholder="Description" required />
+        </div>
+    </div>
+    <div class="addressRow" style="display: block; justify-content: center; margin: 0 auto;">
+        <div class="form-row">
+            <div class="form-group col-md-10">
+                <label asp-for="@Model.StartTime">Discount Start Date</label>
+                <input asp-for="@Model.StartTime" type="datetime" class="form-control"/>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label asp-for="@Model.EndTime">Expiration Date</label>
+                <input asp-for="@Model.EndTime" type="datetime" class="form-control"/>
+            </div>
+            <div class="form-group col-md-1">
+                <label asp-for="@Model.DiscountPercent">Discount Percent</label>
+                <input asp-for="@Model.DiscountPercent" class="form-control" placeholder="%" />
+            </div>
+            <div class="form-group col-md-2">
+                <label asp-for="@Model.Product">Product</label>
+                <input asp-for="@Model.Product" class="form-control" placeholder="Product" />
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
