@@ -1,0 +1,63 @@
+﻿
+@using Models
+@model Employee
+
+<p class="lead">WOW!! We're thrilled to have you! Welcome!!!</p>
+
+<hr class="my-4">
+<div>
+    <div class="row">
+        <div class="col">
+            <h4>Name: @Model.Name</h4>
+        </div>
+        <div class="col">
+            <h4>Street Address: @(Model.Address ?? "-----")</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <h4>Phone Number: @(Model.Phone ?? "-----")</h4>
+                </div>
+                <div class="col">
+                    <h4>Fax Number: @(Model.Fax ?? "-----")</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <h4>City: @(Model.City ?? "-----")</h4>
+                </div>
+                <div class="col">
+                    <h4>Region: @(Model.Region ?? "-----")</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <h4>Postal Code: @(Model.PostalCode ?? "-----")</h4>
+                </div>
+                <div class="col">
+                    <h4>Country: @(Model.Country ?? "-----")</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="my-4">
+    <div class="row">
+        <a asp-action="Index" asp-controller="Home">
+            <button type="button" class="btn btn-primary">Back To Home</button>
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/js/client.js"></script>
+}
