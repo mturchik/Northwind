@@ -21,7 +21,6 @@ namespace Northwind.Controllers
         public IActionResult Create() => View();
 
         [HttpPost]
-   
         public async Task<IActionResult> Create(CreateUser model)
         {
             if (!ModelState.IsValid)
@@ -45,6 +44,7 @@ namespace Northwind.Controllers
                 await _userManager.AddToRoleAsync(newUser, "User");
                 return RedirectToAction("Index");
             }
+
             //Return to Create page if create failed
             foreach (var error in result.Errors)
             {
@@ -53,9 +53,6 @@ namespace Northwind.Controllers
 
             return View(model);
         }
-        //Employee 
-
-       
 
         public async Task<IActionResult> Edit(string id)
         {

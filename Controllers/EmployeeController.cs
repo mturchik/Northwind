@@ -11,9 +11,9 @@ namespace Northwind.Controllers
 {
     public class EmployeeController : Controller
     {
-           
         private readonly INorthwindRepository _db;
         private readonly UserManager<AppUser> _userManager;
+
         public EmployeeController(INorthwindRepository db, UserManager<AppUser> userManager)
         {
             _userManager = userManager;
@@ -25,9 +25,7 @@ namespace Northwind.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(EmployeeWithPassword employeeWithPassword)
         {
-            Employee employee = employeeWithPassword.Employee;
-            //Add more validation here I guess
-            //And maybe redirect to an error page?
+            var employee = employeeWithPassword.Employee;
             if (string.IsNullOrWhiteSpace(employee.Name) ||
                 _db.Employee.Any(c => c.Name == employee.Name))
                 return View(employeeWithPassword);
@@ -36,13 +34,21 @@ namespace Northwind.Controllers
                 ModelState.AddModelError("Email", "An account with that email already exists.");
                 return View(employeeWithPassword);
             }
-            if(employee.Name.Contains(' '))
+
+            if (employee.Name.Contains(' '))
             {
                 ModelState.AddModelError("White", "Name can not contain spaces.");
                 return View(employeeWithPassword);
             }
 
-            //Do the database thing
+            if (!_db.Employee.Any(e => e.Name  == employee.Name ||
+                                       e.Email == employee.Email))
+            {
+                ModelState.AddModelError("Found",
+                    "Employee found with matching name or email, please try again.");
+                return View(employeeWithPassword);
+            }
+
             _db.AddEmployee(employee);
 
             var user = new AppUser
@@ -58,14 +64,14 @@ namespace Northwind.Controllers
                 await _userManager.AddToRoleAsync(newUser, "Employee");
                 return RedirectToAction("Account", "Account");
             }
+
             //Return to Create page if create failed
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(error.Code, error.Description);
             }
 
-            return View(employee);
+            return View(employeeWithPassword);
         }
-
     }
 }

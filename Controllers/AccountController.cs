@@ -19,13 +19,13 @@ namespace Northwind.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Account(string returnUrl)
+        public async Task<IActionResult> Account()
         {
             var user = await _userManager.GetUserAsync(User);
             return View(user);
         }
 
-        public async Task<IActionResult> Login(LoginUser login, string returnUrl)
+        public async Task<IActionResult> Login(LoginUser login)
         {
             if (login == null)
                 return View();
@@ -42,7 +42,7 @@ namespace Northwind.Controllers
             await _signInManager.SignOutAsync();
             var result = await _signInManager.PasswordSignInAsync(user, login.Password, false, false);
             if (result.Succeeded)
-                return Redirect(returnUrl ?? "/Account/Account");
+                return Redirect("/Account/Account");
             
             ModelState.AddModelError("", "Invalid user or password.");
             return View();

@@ -45,10 +45,12 @@
                     <i class="fas fa-users mr-1"></i> Customers
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt"></i> Sign In</a>
-                    <a class="dropdown-item" asp-action="Register" asp-controller="Customer"><i class="fas fa-user-plus"></i> Register</a>
+                    <a class="dropdown-item" asp-action="Login" asp-controller="Account"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                    <a class="dropdown-item" asp-action="Account" asp-controller="Account"><i class="fas fa-info-circle"></i> Account</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" asp-action="Account" asp-route-returnUrl="/Account/Account" asp-controller="Account"><i class="fas fa-info-circle"></i> Account</a>
+                    <a class="dropdown-item" asp-action="Register" asp-controller="Customer"><i class="fas fa-user-plus"></i> Customer - Register</a>
+                    <a class="dropdown-item" asp-action="Register" asp-controller="Employee"><i class="fas fa-briefcase"></i> Employee - Register</a>
+                    <a class="dropdown-item" asp-action="Index" asp-controller="Discount"><i class="fas fa-tags"></i> Employee - Edit Discounts</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" asp-action="Index" asp-controller="Admin"><i class="fas fa-info-circle"></i> Admin - Accounts</a>
                     <a class="dropdown-item" asp-action="Index" asp-controller="RoleAdmin"><i class="fas fa-info-circle"></i> Admin - Roles</a>
