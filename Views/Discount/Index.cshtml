@@ -10,30 +10,83 @@
 <small>Until they expire and we release more.</small>
 
 <hr class="my-4">
-<a class="btn btn-lg btn-outline-secondary btn-success" style="width: 100px; color: white;">Add</a>
-<br/><br />
+<a class="btn btn-lg btn-info" style="width: 100px;" asp-action="AddDiscount">Add</a>
+<br/><br/>
 <div class="row">
     <div class="col list-group-flush">
         <!--Replace with Ajax?-->
         @foreach (var discount in Model)
         {
-        <div class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-                <span class="badge badge-primary badge-pill">Expires @discount.EndTime.ToShortDateString()</span>
-                <span class="mr-2 badge badge-light badge-pill">Code: @discount.Code</span>
-                @discount.Title
-            </div>
-            <p class="m-1">@discount.Description</p>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="badge badge-primary badge-pill">Expires @discount.EndTime.ToShortDateString()</span>
+                    <span class="mr-2 badge badge-light badge-pill">Code: @discount.Code</span>
+                    @discount.Title
+                </div>
+                <p class="m-1">@discount.Description</p>
 
-            <form  method="post" >
-                <a class="btn btn-sm btn-outline-primary">Edit</a>
-                <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
-            </form>
-        </div>
+                <form method="post">
+                    <button class="btn btn-sm btn-outline-info" type="button">Edit</button>
+                    <button class="btn btn-sm btn-outline-danger" type="button">Delete</button>
+                </form>
+            </div>
         }
     </div>
-    
+
 </div>
-<script>
-    //Do some AJAX HERE
-</script>
+
+@section Scripts {
+    <script>
+        $(function() {
+            getDiscounts();
+            getDiscount(5);
+
+            function getDiscounts() {
+                $.getJSON({
+                    url: "../../api/discounts/",
+                    success: function(response, textStatus, jqXhr) {
+                        console.log(response);
+                        //$('#ajax_discounts').html("");
+                        //var template = `
+                        //    ${response.map(i => `
+                        //    <div class="row" >
+                        //    <div class="col" ><span >Code: ${i.code}</span > (${i.title})</div >
+                        //    <div class="col" >Start: ${i.startTime} ||| End: ${i.endTime}</div >
+                        //    </div >
+                        //    `).join('')}
+                        //`;
+                        //$('#ajax_discounts').html(template);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        // log the error to the console
+                        console.log("The following error occured: " + textStatus, errorThrown);
+                    }
+                });
+            }
+
+            function getDiscount(id) {
+                $.getJSON({
+                    url: `../../api/discounts/${id}/`,
+                    success: function(response, textStatus, jqXhr) {
+                        console.log(response);
+                        console.log(JSON.stringify(response));
+                        //$('#ajax_discounts').html("");
+                        //var template = `
+                        //    ${response.map(i => `
+                        //    <div class="row" >
+                        //    <div class="col" ><span >Code: ${i.code}</span > (${i.title})</div >
+                        //    <div class="col" >Start: ${i.startTime} ||| End: ${i.endTime}</div >
+                        //    </div >
+                        //    `).join('')}
+                        //`;
+                        //$('#ajax_discounts').html(template);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        // log the error to the console
+                        console.log("The following error occured: " + textStatus, errorThrown);
+                    }
+                });
+            }
+        });
+    </script>
+}

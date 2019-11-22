@@ -9,32 +9,19 @@ namespace Northwind.Controllers
 {
     public class DiscountController : Controller
     {
+        private readonly INorthwindRepository _db;
 
-        private INorthwindRepository _repository;
-
-        public DiscountController(INorthwindRepository repository)
+        public DiscountController(INorthwindRepository db)
         {
-            _repository = repository;
+            _db = db;
         }
 
-        public IActionResult Index(int id)
-        {
-            var results = _repository.Discounts;
+        public IActionResult Index() => View(_db.Discounts.OrderBy(d => d.EndTime));
 
-            if (id != 0)
-            {
-                results = _repository.Discounts
-                    .Where(d => d.StartTime <= DateTime.Now && d.EndTime > DateTime.Now);
-            }
+        public IActionResult AddDiscount() => View();
 
-            return View(results);
-        }
-
-        public async Task<IActionResult> AddDiscount()
-        {
-            return View();
-        }
-
+        //todo: Create views
+        //todo: Implement AJAX in views
         public async Task<IActionResult> EditDiscount(string id)
         {
             return View();
@@ -44,6 +31,5 @@ namespace Northwind.Controllers
         {
             return View();
         }
-
     }
 }
