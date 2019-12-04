@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Northwind.Models;
 
 namespace Northwind.Controllers
@@ -22,12 +23,13 @@ namespace Northwind.Controllers
 
         //todo: Create views
         //todo: Implement AJAX in views
-        public IActionResult EditDiscount(string id)
+        public async Task<IActionResult> EditDiscount(string id)
         {
-            return View();
+
+            return View(_db.Discounts.Include(d => d.Product).First(d => d.DiscountId == id));
         }
 
-        public async Task<IActionResult> Delete(string id)
+        public IActionResult Delete(string id)
         {
             return View();
         }
