@@ -22,7 +22,7 @@ namespace Northwind.Controllers
 
         //todo: Create views
         //todo: Implement AJAX in views
-        public async Task<IActionResult> EditDiscount(string id)
+        public IActionResult EditDiscount(string id)
         {
             return View();
         }

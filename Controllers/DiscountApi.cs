@@ -50,7 +50,7 @@ namespace Northwind.Controllers
 
             model.Code = rand;
             _db.AddDiscount(model);
-            return Ok();
+            return Redirect("/Discount/Index");
         }
 
         [HttpPost]
@@ -79,10 +79,10 @@ namespace Northwind.Controllers
             }
 
             _db.EditDiscount(toUpd);
-            return Ok();
+            return Redirect("/Discount/Index");
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("/api/deleteDiscount/{id}/")]
         public IActionResult Delete(int id)
         {
@@ -91,7 +91,7 @@ namespace Northwind.Controllers
             else
                 return NotFound();
 
-            return Ok();
+            return Redirect("/Discount/Index");
         }
 
         private bool ValidateDiscount(Discount model) =>
