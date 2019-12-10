@@ -23,7 +23,7 @@ namespace Northwind.Controllers
 
         //todo: Create views
         //todo: Implement AJAX in views
-        public async Task<IActionResult> EditDiscount(string id)
+        public async Task<IActionResult> Edit(int id)
         {
 
             return View(_db.Discounts.Include(d => d.Product).First(d => d.DiscountId == id));
@@ -31,7 +31,7 @@ namespace Northwind.Controllers
 
         public IActionResult Delete(string id)
         {
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
