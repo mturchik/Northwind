@@ -26,21 +26,23 @@
 
 @section Scripts {
     <script>
-        $(function () {
+        $(function() {
             getDiscounts();
             getDiscount(5);
 
             function getDiscounts() {
                 $.getJSON({
                     url: "../../api/discounts/",
-                    success: function (response, textStatus, jqXhr) {
+                    success: function(response, textStatus, jqXhr) {
                         console.log(response);
                         $('#ajax_discounts').html("");
                         var template = `
                                 ${response.map(i => `
                                         <div class="list-group-item d-flex justify-content-between align-items-center">
                                             <div>
-                                                <span class="badge badge-light badge-pill">Expires ${i.endTime.substr(0, 10)}</span>
+                                                <span class="badge badge-light badge-pill">Expires ${i.endTime.substr(
+                            0,
+                            10)}</span>
                                                 <span class="mr-2 badge badge-light badge-pill">Code: ${i.code}</span>
                                                 ${i.title}
                                             </div>
@@ -56,38 +58,38 @@
                                         </div>
                                     `).join('')}
                                 `;
-                            $('#ajax_discounts').html(template);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            // log the error to the console
-                            console.log("The following error occured: " + textStatus, errorThrown);
-                        }
-                    });
-                }
+                        $('#ajax_discounts').html(template);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        // log the error to the console
+                        console.log("The following error occured: " + textStatus, errorThrown);
+                    }
+                });
+            }
 
-                function getDiscount(id) {
-                    $.getJSON({
-                        url: `../../api/discounts/${id}/`,
-                        success: function (response, textStatus, jqXhr) {
-                            console.log(response);
-                            console.log(JSON.stringify(response));
-                            //$('#ajax_discounts').html("");
-                            //var template = `
-                            //    ${response.map(i => `
-                            //    <div class="row" >
-                            //    <div class="col" ><span >Code: ${i.code}</span > (${i.title})</div >
-                            //    <div class="col" >Start: ${i.startTime} ||| End: ${i.endTime}</div >
-                            //    </div >
-                            //    `).join('')}
-                            //`;
-                            //$('#ajax_discounts').html(template);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            // log the error to the console
-                            console.log("The following error occured: " + textStatus, errorThrown);
-                        }
-                    });
-                }
-            });
+            function getDiscount(id) {
+                $.getJSON({
+                    url: `../../api/discounts/${id}/`,
+                    success: function(response, textStatus, jqXhr) {
+                        console.log(response);
+                        console.log(JSON.stringify(response));
+                        //$('#ajax_discounts').html("");
+                        //var template = `
+                        //    ${response.map(i => `
+                        //    <div class="row" >
+                        //    <div class="col" ><span >Code: ${i.code}</span > (${i.title})</div >
+                        //    <div class="col" >Start: ${i.startTime} ||| End: ${i.endTime}</div >
+                        //    </div >
+                        //    `).join('')}
+                        //`;
+                        //$('#ajax_discounts').html(template);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        // log the error to the console
+                        console.log("The following error occured: " + textStatus, errorThrown);
+                    }
+                });
+            }
+        });
     </script>
 }
